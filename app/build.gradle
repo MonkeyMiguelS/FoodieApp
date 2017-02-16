@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
+
+
+def STRING = "String"
+def BOOLEAN = "boolean"
+def INT = "int"
+
+android {
+    compileSdkVersion parent.ext.androidCompileSdkVersion
+    buildToolsVersion parent.ext.androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId parent.ext.androidApplicationId
+        minSdkVersion parent.ext.androidMinSdkVersion
+        targetSdkVersion parent.ext.androidTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField INT, "CONCURRENT_INTERACTORS", "3"
+
+        testInstrumentationRunner parent.ext.defaultConfigInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        dev {
+            buildConfigField STRING, "API_URL", '"https://private-bff52a-ruralviaapi.apiary-mock.com/"'
+        }
+
+        pre {
+            buildConfigField STRING, "API_URL", '"https://wssrsi02.cajarural.com:10004/SOA_RVIA/Empresa/PS/rest/v1/"'
+        }
+
+        pro {
+            buildConfigField STRING, "API_URL", '"https://tests.mo2o.com/"'
+        }
+
+        local{
+            buildConfigField STRING, "API_URL", '"/"'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Android Supports
+    compile parent.ext.libSupportv4
+    compile parent.ext.libSupportRecyclerView
+    compile parent.ext.libSupportDesign
+    compile parent.ext.libSupportAppCompatv7
+    compile parent.ext.libSupportAnnotations
+
+    //Thirds Party
+    apt parent.ext.libDaggerCompiler
+    compile parent.ext.libDagger
+    provided parent.ext.libDaggerAnnotation
+
+    compile parent.ext.libButterKnife
+    compile parent.ext.libRetrofitCompile
+    compile parent.ext.libOkHttpCompile
+    compile parent.ext.libJsonRetrofitCompile
+    compile parent.ext.libLogginInterceptor
+    compile parent.ext.libDecoratorView
+    provided parent.ext.libDecotatorViewCompiler
+    compile parent.ext.libLog
+
+
+    //Testing
+    testCompile parent.ext.libRoboelectric
+    testCompile parent.ext.libJUnit
+    testCompile parent.ext.libMockito
+    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
+    testCompile 'com.github.fabioCollini:DaggerMock:0.6.3'
+    testCompile parent.ext.libMockWebServer
+
+    androidTestCompile parent.ext.libMockWebServer
+    androidTestCompile parent.ext.libSupportAnnotations
+    androidTestCompile(parent.ext.libEspresso, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile(parent.ext.libTestRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile parent.ext.libTestRules
+    androidTestCompile parent.ext.libMockito
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+
+    androidTestCompile "com.github.crittercism.dexmaker:dexmaker-parent:f8e7c23e4172af8767758c99c9165dd2bd4f0e7f"
+    androidTestCompile "com.github.crittercism.dexmaker:dexmaker-mockito:f8e7c23e4172af8767758c99c9165dd2bd4f0e7f"
+    androidTestCompile "com.github.crittercism.dexmaker:dexmaker-dx:f8e7c23e4172af8767758c99c9165dd2bd4f0e7f"
+    androidTestCompile "com.github.crittercism.dexmaker:dexmaker:f8e7c23e4172af8767758c99c9165dd2bd4f0e7f"
+
+    androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+    androidTestCompile 'com.github.fabioCollini:DaggerMock:0.6.3'
+    androidTestApt parent.ext.libDaggerCompiler
+
+    compile project(path: ':presentation')
+    compile project(path: ':domain')
+    compile project(path: ':data')
+}

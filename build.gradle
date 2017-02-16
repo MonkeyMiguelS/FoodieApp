@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath "io.realm:realm-gradle-plugin:2.3.0"
+    }
+}
+
+allprojects {
+    ext {
+        //Android Config
+        supportLibraryVersion = "24.2.0"
+
+        androidBuildToolsVersion = "25.0.1"
+        androidMinSdkVersion = 15
+        androidTargetSdkVersion = 25
+        androidCompileSdkVersion = 25
+        androidApplicationId = "com.jmperezra.foodie"
+
+        //Android Libraries
+        libSupportAppCompatv7 = "com.android.support:appcompat-v7:$supportLibraryVersion"
+        libSupportv4 = "com.android.support:support-v4:$supportLibraryVersion"
+        libSupportRecyclerView = "com.android.support:recyclerview-v7:$supportLibraryVersion"
+        libSupportDesign = "com.android.support:design:$supportLibraryVersion"
+        libSupportAnnotations = "com.android.support:support-annotations:$supportLibraryVersion"
+
+        //** Third Party Libraries **
+
+        //Gradle: Injection Dependencies
+        libDaggerCompiler = 'com.google.dagger:dagger-compiler:2.8'
+        libDagger = 'com.google.dagger:dagger:2.8'
+        libDaggerAnnotation = 'org.glassfish:javax.annotation:10.0-b28'
+
+        //Butterknife
+        libButterKnife = "com.jakewharton:butterknife:7.0.1"
+
+        //Retrofit and OkHttp: Client WebService
+        libRetrofitCompile = 'com.squareup.retrofit2:retrofit:2.1.0'
+        libOkHttpCompile = 'com.squareup.okhttp3:okhttp:3.5.0'
+        libJsonRetrofitCompile = 'com.squareup.retrofit2:converter-gson:2.1.0'
+        libLogginInterceptor = 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+
+        //libThreads
+        libDecoratorView = 'me.panavtec:threaddecoratedview-common:1.5.2'
+        libDecotatorViewCompiler = 'me.panavtec:threaddecoratedview-compiler:1.5.2'
+
+        //Loggin
+        libLog = 'com.jakewharton.timber:timber:4.5.0'
+
+        //Testing
+        defaultConfigInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        libEspresso = "com.android.support.test.espresso:espresso-core:2.2.2"
+        libTestRunner = "com.android.support.test:runner:0.5"
+        libTestRules = "com.android.support.test:rules:0.5"
+
+        libRoboelectric = "org.robolectric:robolectric:3.2"
+        libJUnit = 'junit:junit:4.12'
+        libMockito = 'org.mockito:mockito-core:1.10.19'
+        libMockWebServer = 'com.squareup.okhttp3:mockwebserver:3.5.0'
+    }
+
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
