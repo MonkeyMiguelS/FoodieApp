@@ -47,18 +47,18 @@ public class ReceiptPresenterTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testWithOutViewAttach() throws Exception{
+    public void whenInitPresenterWithOutAttachThenThrowException() throws Exception{
         receiptPresenter.onViewAttached();
     }
 
     @Test
-    public void testWithOutViewAttach1() throws Exception{
+    public void whenInitPresenterThenCallShowSpinner() throws Exception{
         receiptPresenter.attachView(receiptView);
         Mockito.verify(receiptView, times(1)).showSpinner();
     }
 
     @Test
-    public void testWithOutViewAttach2() throws Exception{
+    public void whenInitPresenterThenRenderReceiptView() throws Exception{
         when(getReceiptUseCase.call()).thenReturn(successResponse);
         receiptPresenter.attachView(receiptView);
 
@@ -69,7 +69,7 @@ public class ReceiptPresenterTest {
     }
 
     @Test
-    public void testWithOutViewAttach3() throws Exception{
+    public void whenInternetErrorConnectionThenCallShowNetworkError() throws Exception{
         when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_NET_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
@@ -80,18 +80,7 @@ public class ReceiptPresenterTest {
     }
 
     @Test
-    public void testWithOutViewAttach4() throws Exception{
-        when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_NET_RESPONSE);
-
-        receiptPresenter.attachView(receiptView);
-
-        Mockito.verify(receiptView, times(1)).showSpinner();
-        Mockito.verify(receiptView, times(1)).hideSpinner();
-        Mockito.verify(receiptView, times(1)).showNetworkError();
-    }
-
-    @Test
-    public void testWithOutViewAttach5() throws Exception{
+    public void whenInternalErrorThenCallShowInternalError() throws Exception{
         when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_INTERNAL_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
@@ -102,7 +91,7 @@ public class ReceiptPresenterTest {
     }
 
     @Test
-    public void testWithOutViewAttach6() throws Exception{
+    public void whenApiErrorThenCallShowApiError() throws Exception{
         when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_API_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
