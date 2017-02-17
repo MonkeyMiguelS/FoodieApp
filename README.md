@@ -1,8 +1,8 @@
 # FoodieApp
 Aplicación sin uso comercial. Aplicación desarrollada para **workshop** sobre testing en una aplicación Android.
 Además se verán los siguientes conceptos:
-* Clean Architecture.
-* Inyección de dependencias (Dagger 2).
+* [Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html).
+* Inyección de dependencias [(Dagger 2)](https://google.github.io/dagger/).
 * Abstracciones
 
 ## Clean Architecture o Arquitectura por Capas.
