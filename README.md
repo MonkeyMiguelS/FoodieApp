@@ -1,7 +1,7 @@
 # FoodieApp
-Aplicación sin uso comercial. Aplicación desarrollada para workshop sobre testing, patrones, arquitectura, etc. en Android.
+Aplicación sin uso comercial. Aplicación desarrollada para **workshop** sobre testing, patrones, arquitectura, etc. en Android.
 
-## Arquitectura Clean o Arquitectura por Capas.
+## Clean Architecture o Arquitectura por Capas.
 Se ha elegido una arquitectura por capas para diferenciar bien las distintas responsabilidades dentro de una aplicación. Además se ha separado en módulos el código para facilitar a distinguir que partes se testean con herramientas java y cuales necesitan herramientas para Android.
 Cómo modulos dentro de la aplicación se ha diferenciado:
 * Módulo app o de aplicación. Es el modulo y capa donde se define todo lo relacionado con el sdk de Android. Depende por tanto del sdk.
