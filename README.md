@@ -1,5 +1,9 @@
 # FoodieApp
-Aplicación sin uso comercial. Aplicación desarrollada para **workshop** sobre testing, patrones, arquitectura, etc. en Android.
+Aplicación sin uso comercial. Aplicación desarrollada para **workshop** sobre testing en una aplicación Android.
+Además se verán los siguientes conceptos:
+* Clean Architecture.
+* Inyección de dependencias (Dagger 2).
+* Abstracciones
 
 ## Clean Architecture o Arquitectura por Capas.
 Se ha elegido una arquitectura por capas para diferenciar bien las distintas responsabilidades dentro de una aplicación. Además se ha separado en módulos el código para facilitar a distinguir que partes se testean con herramientas java y cuales necesitan herramientas para Android.
@@ -12,6 +16,11 @@ Cómo modulos dentro de la aplicación se ha diferenciado:
 ## Inyección de Dependencias.
 En el proyecto se usará inyección de dependencias. Para facilitar el desarrollo de factorías se usará [Dagger 2](https://google.github.io/dagger/). 
 Dagger 2 será nuestro contenedor de dependencias.
+
+## Abstracciones
+El proyecto contiene varios ejemplos sobre abstracciones en librerías externas. Uno de ellos puede ser la abstracción usada para el logger. Nos permite visualizar mensajes por el LogCat en todos los módulos dependan o no de Android.
+* Abstración para el [Logger](https://github.com/JakeWharton/timber).
+* Concreción para el [Logger](https://github.com/jmperezra/FoodieApp/blob/master/app/src/main/java/com/jmperezra/foodie/logger/LoggerImpl.java) usando la librería [Timber](https://github.com/JakeWharton/timber) de Jake Wharton para Android.
 
 ## Testing
 Los test unitarios se realizarán por los módulos definidos:
