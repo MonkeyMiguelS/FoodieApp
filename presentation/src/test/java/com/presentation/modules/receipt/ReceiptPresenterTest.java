@@ -1,14 +1,12 @@
 package com.presentation.modules.receipt;
 
-import com.domain.exceptions.errors.ApiUseCaseError;
-import com.domain.exceptions.errors.InternalUseCaseError;
-import com.domain.exceptions.errors.NetworkUseCaseError;
 import com.domain.models.ReceiptModel;
 import com.domain.usecase.UseCaseResponse;
 import com.domain.usecase.receipt.GetReceiptUseCase;
 import com.presentation.commons.FakeUseCaseInvoker;
 import com.presentation.commons.FakeViewInjector;
 import com.presentation.commons.ReceiptStub;
+import com.presentation.commons.ResponseStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,15 +32,6 @@ public class ReceiptPresenterTest {
     ReceiptView receiptView;
 
     ReceiptModel receiptModel;
-
-    public final UseCaseResponse<ReceiptModel> ERROR_NET_RESPONSE =
-            new UseCaseResponse<>(new NetworkUseCaseError());
-
-    public final UseCaseResponse<ReceiptModel> ERROR_INTERNAL_RESPONSE =
-            new UseCaseResponse<>(new InternalUseCaseError());
-
-    public final UseCaseResponse<ReceiptModel> ERROR_API_RESPONSE =
-            new UseCaseResponse<>(new ApiUseCaseError());
 
     public UseCaseResponse<ReceiptModel> successResponse;
 
@@ -81,7 +70,7 @@ public class ReceiptPresenterTest {
 
     @Test
     public void testWithOutViewAttach3() throws Exception{
-        when(getReceiptUseCase.call()).thenReturn(ERROR_NET_RESPONSE);
+        when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_NET_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
 
@@ -92,7 +81,7 @@ public class ReceiptPresenterTest {
 
     @Test
     public void testWithOutViewAttach4() throws Exception{
-        when(getReceiptUseCase.call()).thenReturn(ERROR_NET_RESPONSE);
+        when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_NET_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
 
@@ -103,7 +92,7 @@ public class ReceiptPresenterTest {
 
     @Test
     public void testWithOutViewAttach5() throws Exception{
-        when(getReceiptUseCase.call()).thenReturn(ERROR_INTERNAL_RESPONSE);
+        when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_INTERNAL_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
 
@@ -114,7 +103,7 @@ public class ReceiptPresenterTest {
 
     @Test
     public void testWithOutViewAttach6() throws Exception{
-        when(getReceiptUseCase.call()).thenReturn(ERROR_API_RESPONSE);
+        when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_API_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
 
