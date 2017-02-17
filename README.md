@@ -19,7 +19,7 @@ Dagger 2 será nuestro contenedor de dependencias.
 
 ## Abstracciones
 El proyecto contiene varios ejemplos sobre abstracciones en librerías externas. Uno de ellos puede ser la abstracción usada para el logger. Nos permite visualizar mensajes por el LogCat en todos los módulos dependan o no de Android.
-* Abstración para el [Logger](https://github.com/JakeWharton/timber).
+* Abstración para el [Logger](https://github.com/jmperezra/FoodieApp/blob/master/domain/src/main/java/com/domain/commons/logger/Logger.java).
 * Concreción para el [Logger](https://github.com/jmperezra/FoodieApp/blob/master/app/src/main/java/com/jmperezra/foodie/logger/LoggerImpl.java) usando la librería [Timber](https://github.com/JakeWharton/timber) de Jake Wharton para Android.
 
 ## Testing
