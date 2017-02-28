@@ -6,10 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.jmperezra.foodie.FoodieApplication;
 import com.jmperezra.foodie.di.ComponentsHelper;
+import com.jmperezra.foodie.views.navigation.Navigator;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    @Inject
+    protected Navigator navigator;
 
     public ComponentsHelper getComponentsHelper() {
         return ((FoodieApplication)getApplication()).getComponentsHelper();

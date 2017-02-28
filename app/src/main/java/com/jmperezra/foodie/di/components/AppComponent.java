@@ -3,9 +3,12 @@ package com.jmperezra.foodie.di.components;
 import android.content.SharedPreferences;
 
 import com.data.repository.api.ApiEndPoints;
+import com.jmperezra.foodie.commons.network.HostSelectionInterceptor;
 import com.jmperezra.foodie.di.modules.AppModule;
-import com.jmperezra.foodie.di.modules.ReceiptModule;
+import com.jmperezra.foodie.di.modules.LoginModule;
 import com.jmperezra.foodie.di.modules.NetworkModule;
+import com.jmperezra.foodie.di.modules.ReceiptModule;
+import com.jmperezra.foodie.di.modules.SplashModule;
 import com.presentation.AppViewInjector;
 import com.presentation.UseCaseInvoker;
 
@@ -24,7 +27,9 @@ import retrofit2.Retrofit;
 )
 public interface AppComponent {
 
+    SplashComponent plus(SplashModule module);
     ReceiptComponent plus(ReceiptModule module);
+    LoginComponent plus(LoginModule module);
 
     UseCaseInvoker getUseCaseInvoker();
     SharedPreferences getSharedPreferences();
@@ -32,4 +37,5 @@ public interface AppComponent {
     AppViewInjector getAppViewInjector();
     Retrofit getRetrofit();
     OkHttpClient getOkHttpClient();
+    HostSelectionInterceptor getHostSelectionInterceptor();
 }

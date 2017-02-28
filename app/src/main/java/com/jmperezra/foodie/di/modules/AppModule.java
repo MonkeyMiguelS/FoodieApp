@@ -5,23 +5,26 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.domain.commons.JsonUtil;
 import com.domain.commons.logger.Logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jmperezra.foodie.BuildConfig;
 import com.jmperezra.foodie.FoodieApplication;
+import com.jmperezra.foodie.commons.invoker.LogExceptionHandler;
+import com.jmperezra.foodie.commons.invoker.PriorizableThreadPoolExecutor;
+import com.jmperezra.foodie.commons.invoker.UseCaseInvokerImp;
+import com.jmperezra.foodie.commons.invoker.UseCaseOutputThreadFactory;
+import com.jmperezra.foodie.commons.invoker.UseCasePriorityBlockingQueue;
+import com.jmperezra.foodie.commons.json.JsonUtilImpl;
+import com.jmperezra.foodie.commons.logger.LoggerImpl;
+import com.jmperezra.foodie.commons.outputs.BackThreadSpec;
+import com.jmperezra.foodie.commons.outputs.MainThreadSpec;
+import com.jmperezra.foodie.commons.outputs.SameThreadSpec;
 import com.jmperezra.foodie.di.qualifiers.BackThread;
 import com.jmperezra.foodie.di.qualifiers.SameThread;
 import com.jmperezra.foodie.di.qualifiers.UiThread;
-import com.jmperezra.foodie.invoker.LogExceptionHandler;
-import com.jmperezra.foodie.invoker.PriorizableThreadPoolExecutor;
-import com.jmperezra.foodie.invoker.UseCaseInvokerImp;
-import com.jmperezra.foodie.invoker.UseCaseOutputThreadFactory;
-import com.jmperezra.foodie.invoker.UseCasePriorityBlockingQueue;
-import com.jmperezra.foodie.logger.LoggerImpl;
-import com.jmperezra.foodie.outputs.BackThreadSpec;
-import com.jmperezra.foodie.outputs.MainThreadSpec;
-import com.jmperezra.foodie.outputs.SameThreadSpec;
+import com.jmperezra.foodie.views.navigation.Navigator;
 import com.presentation.AppViewInjector;
 import com.presentation.AppViewInjectorImpl;
 import com.presentation.UseCaseInvoker;
@@ -113,9 +116,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    //@UiThread
-    public AppViewInjector provideAppViewInjector(){
-        return new AppViewInjectorImpl(new MainThreadSpec());
+    public AppViewInjector provideAppViewInjector(@UiThread ThreadSpec threadSpec){
+        return new AppViewInjectorImpl(threadSpec);
     }
 
     @Provides
@@ -131,4 +133,15 @@ public class AppModule {
         return new LoggerImpl();
     }
 
+    @Provides
+    @Singleton
+    public Navigator provideNavigator(){
+        return new Navigator();
+    }
+
+    @Provides
+    @Singleton
+    public JsonUtil provideJson(JsonUtilImpl jsonUtil){
+        return jsonUtil;
+    }
 }

@@ -1,10 +1,64 @@
-apply plugin: 'java'
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(path: ':domain')
-    compile 'javax.inject:javax.inject:1'
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //Third Party
+    apt parent.ext.libDaggerCompiler
+    compile parent.ext.libDagger
+    provided parent.ext.libDaggerAnnotation
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+    compile parent.ext.libRetrofitCompile
+    compile parent.ext.libJsonRetrofitCompile
+    compile parent.ext.libOkHttpCompile
+    compile parent.ext.libLogginInterceptor
+    compile parent.ext.libLog
+
+    //Test
+    //Testing
+    testCompile parent.ext.libRoboelectric
+    testCompile parent.ext.libJUnit
+    testCompile parent.ext.libMockito
+    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
+    testCompile 'com.github.fabioCollini:DaggerMock:0.6.3'
+    testCompile parent.ext.libMockWebServer
+
+    androidTestCompile parent.ext.libMockWebServer
+    androidTestCompile parent.ext.libSupportAnnotations
+    androidTestCompile(parent.ext.libEspresso, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile(parent.ext.libTestRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile parent.ext.libTestRules
+    androidTestCompile parent.ext.libMockito
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
+
+    androidTestCompile "com.github.crittercism.dexmaker:dexmaker-parent:f8e7c23e4172af8767758c99c9165dd2bd4f0e7f"
+    androidTestCompile "com.github.crittercism.dexmaker:dexmaker-mockito:f8e7c23e4172af8767758c99c9165dd2bd4f0e7f"
+    androidTestCompile "com.github.crittercism.dexmaker:dexmaker-dx:f8e7c23e4172af8767758c99c9165dd2bd4f0e7f"
+    androidTestCompile "com.github.crittercism.dexmaker:dexmaker:f8e7c23e4172af8767758c99c9165dd2bd4f0e7f"
+
+    androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+    androidTestCompile 'com.github.fabioCollini:DaggerMock:0.6.3'
+    androidTestApt parent.ext.libDaggerCompiler
+
+    //Dependencies
+    compile project(':domain')
+}

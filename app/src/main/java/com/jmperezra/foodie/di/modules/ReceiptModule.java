@@ -24,7 +24,7 @@ public class ReceiptModule extends ActivityModule {
 
     @Provides
     @ActivityScope
-    ReceiptPresenter provideDemoPresenter(AppViewInjector appViewInjector,
+    public ReceiptPresenter provideReceiptPresenter(AppViewInjector appViewInjector,
                                           UseCaseInvoker useCaseInvoker,
                                           GetReceiptUseCase getReceiptUseCase){
         return new ReceiptPresenter(appViewInjector, useCaseInvoker, getReceiptUseCase);
@@ -32,19 +32,19 @@ public class ReceiptModule extends ActivityModule {
 
     @Provides
     @ActivityScope
-    GetReceiptUseCase provideGetReceiptUseCase(ReceiptLocalGateway localGateway, ReceiptApiGateway apiGateway){
+    public GetReceiptUseCase provideGetReceiptUseCase(ReceiptLocalGateway localGateway, ReceiptApiGateway apiGateway){
         return new GetReceiptUseCase(localGateway, apiGateway);
     }
 
     @Provides
     @ActivityScope
-    ReceiptLocalGateway provideReceiptLocalGateway(ReceiptLocalGatewayImpl localGateway){
+    public ReceiptLocalGateway provideReceiptLocalGateway(ReceiptLocalGatewayImpl localGateway){
         return localGateway;
     }
 
     @Provides
     @ActivityScope
-    ReceiptApiGateway provideReceiptApiGateway(ReceiptApiGatewayImpl apiGateway){
+    public ReceiptApiGateway provideReceiptApiGateway(ReceiptApiGatewayImpl apiGateway){
         return apiGateway;
     }
 }

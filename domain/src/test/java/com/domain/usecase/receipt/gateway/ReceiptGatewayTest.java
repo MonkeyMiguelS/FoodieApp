@@ -1,10 +1,9 @@
 package com.domain.usecase.receipt.gateway;
 
-import com.domain.commons.stubs.ReceiptStub;
+import com.domain.testcommons.stubs.ReceiptStub;
 import com.domain.gateway.receipt.ReceiptApiGateway;
 import com.domain.gateway.receipt.ReceiptLocalGateway;
 import com.domain.models.ReceiptModel;
-import com.domain.usecase.UseCaseResponse;
 import com.domain.usecase.receipt.GetReceiptUseCase;
 
 import org.junit.Before;

@@ -3,10 +3,10 @@ package com.presentation.modules.receipt;
 import com.domain.models.ReceiptModel;
 import com.domain.usecase.UseCaseResponse;
 import com.domain.usecase.receipt.GetReceiptUseCase;
-import com.presentation.commons.FakeUseCaseInvoker;
-import com.presentation.commons.FakeViewInjector;
-import com.presentation.commons.ReceiptStub;
-import com.presentation.commons.ResponseStub;
+import com.presentation.testcommons.FakeUseCaseInvoker;
+import com.presentation.testcommons.FakeViewInjector;
+import com.presentation.testcommons.ReceiptStub;
+import com.presentation.testcommons.ResponseStub;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,18 +47,18 @@ public class ReceiptPresenterTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void whenInitPresenterWithOutAttachThenThrowException() throws Exception{
+    public void shouldThrowExceptionIfDontViewAttache() throws Exception{
         receiptPresenter.onViewAttached();
     }
 
     @Test
-    public void whenInitPresenterThenCallShowSpinner() throws Exception{
+    public void shouldShowSpinnerWhenInitPresenter() throws Exception{
         receiptPresenter.attachView(receiptView);
         Mockito.verify(receiptView, times(1)).showSpinner();
     }
 
     @Test
-    public void whenInitPresenterThenRenderReceiptView() throws Exception{
+    public void shouldRenderReceiptViewWhenInitPresenter() throws Exception{
         when(getReceiptUseCase.call()).thenReturn(successResponse);
         receiptPresenter.attachView(receiptView);
 
@@ -69,7 +69,7 @@ public class ReceiptPresenterTest {
     }
 
     @Test
-    public void whenInternetErrorConnectionThenCallShowNetworkError() throws Exception{
+    public void shouldShowNetworkErrorWhenInternetErrorConnection() throws Exception{
         when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_NET_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
@@ -80,7 +80,7 @@ public class ReceiptPresenterTest {
     }
 
     @Test
-    public void whenInternalErrorThenCallShowInternalError() throws Exception{
+    public void shouldShowInternalErrorWhenInternalErrorResponse() throws Exception{
         when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_INTERNAL_RESPONSE);
 
         receiptPresenter.attachView(receiptView);
@@ -91,7 +91,7 @@ public class ReceiptPresenterTest {
     }
 
     @Test
-    public void whenApiErrorThenCallShowApiError() throws Exception{
+    public void shouldShowApiErrorWhenApiErrorResponse() throws Exception{
         when(getReceiptUseCase.call()).thenReturn(ResponseStub.ERROR_API_RESPONSE);
 
         receiptPresenter.attachView(receiptView);

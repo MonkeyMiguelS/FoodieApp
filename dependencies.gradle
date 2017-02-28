@@ -1,0 +1,40 @@
+allprojects {
+    ext {
+
+        supportLibraryVersion = "24.2.0"
+        dependencies = [libSupportAppCompatv7       : "com.android.support:appcompat-v7:$supportLibraryVersion",
+                        libSupportv4                : "com.android.support:support-v4:$supportLibraryVersion",
+                        libSupportRecyclerView      : "com.android.support:recyclerview-v7:$supportLibraryVersion",
+                        libSupportDesign            : "com.android.support:design:$supportLibraryVersion",
+                        libSupportAnnotations       : "com.android.support:support-annotations:$supportLibraryVersion",
+                        libDaggerCompiler           : "com.google.dagger:dagger-compiler:2.8",
+                        libDagger                   : "com.google.dagger:dagger:2.8",
+                        libDaggerAnnotation         : "org.glassfish:javax.annotation:10.0-b28",
+                        libButterKnife              : "com.jakewharton:butterknife:7.0.1",
+                        libRetrofitCompile          : "com.squareup.retrofit2:retrofit:2.1.0",
+                        libOkHttpCompile            : "com.squareup.okhttp3:okhttp:3.5.0",
+                        libJsonRetrofitCompile      : "com.squareup.retrofit2:converter-gson:2.1.0",
+                        libLogginInterceptor        : "com.squareup.okhttp3:logging-interceptor:3.5.0",
+                        libDecoratorView            : "me.panavtec:threaddecoratedview-common:1.5.2",
+                        libDecotatorViewCompiler    : "me.panavtec:threaddecoratedview-compiler:1.5.2",
+                        libLog                      : "com.jakewharton.timber:timber:4.5.0"]
+
+        testDependencies = [libMockito  : "org.mockito:mockito-core:1.10.19",
+                            libJUnit    : "junit:junit:4.12",
+                            hamcrest    : "org.hamcrest:hamcrest-library:1.3",
+                            libMockito  : "org.khronos:opengl-api:gl1.1-android-2.1_r1",
+                            libKhronos  : "org.khronos:opengl-api:gl1.1-android-2.1_r1",
+                            libDaggerMock : "com.github.fabioCollini:DaggerMock:0.6.3",
+                            libRoboelectric : "org.robolectric:robolectric:3.2"]
+
+        espressoVersion = "2.2.2"
+
+        androidTestDependencies = [runner          : "com.android.support.test:runner:0.5",
+                                   rules           : "com.android.support.test:rules:0.5",
+                                   espresso_core   : "com.android.support.test.espresso:espresso-core:$espressoVersion",
+                                   espresso_contrib: "com.android.support.test.espresso:espresso-contrib:$espressoVersion",
+                                   espresso_intents: "com.android.support.test.espresso:espresso-intents:$espressoVersion",
+                                   libMockWebServer: "",
+                                   libSupportAnnotations : ""]
+    }
+}

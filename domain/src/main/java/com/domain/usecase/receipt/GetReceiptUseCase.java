@@ -2,7 +2,7 @@ package com.domain.usecase.receipt;
 
 import com.domain.exceptions.ApiGatewayException;
 import com.domain.exceptions.LocalGatewayException;
-import com.domain.exceptions.NetworkGatewayException;
+import com.domain.exceptions.NetworkException;
 import com.domain.exceptions.errors.ApiUseCaseError;
 import com.domain.exceptions.errors.InternalUseCaseError;
 import com.domain.exceptions.errors.NetworkUseCaseError;
@@ -26,6 +26,7 @@ public class GetReceiptUseCase implements UseCase<UseCaseResponse<ReceiptModel>>
     @Override
     public UseCaseResponse<ReceiptModel> call(){
         try{
+
             return fromLocal();
         }catch (LocalGatewayException ex) {
             return fromApi();
@@ -54,7 +55,7 @@ public class GetReceiptUseCase implements UseCase<UseCaseResponse<ReceiptModel>>
             }
         }catch (ApiGatewayException ex){
             return responseError(new ApiUseCaseError());
-        }catch (NetworkGatewayException ex){
+        }catch (NetworkException ex){
             return responseError(new NetworkUseCaseError());
         }
     }

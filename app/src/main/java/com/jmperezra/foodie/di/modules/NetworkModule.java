@@ -3,6 +3,7 @@ package com.jmperezra.foodie.di.modules;
 import com.data.repository.api.ApiEndPoints;
 import com.google.gson.Gson;
 import com.jmperezra.foodie.BuildConfig;
+import com.jmperezra.foodie.commons.network.HostSelectionInterceptor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -28,8 +29,10 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient(final HttpLoggingInterceptor loggingInterceptor) {
+    public OkHttpClient provideOkHttpClient(final HttpLoggingInterceptor loggingInterceptor,
+                                            final HostSelectionInterceptor hostSelectionInterceptor) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.addInterceptor(hostSelectionInterceptor);
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(loggingInterceptor);
         }
@@ -58,5 +61,11 @@ public class NetworkModule {
     @Singleton
     public ApiEndPoints provideApiService(Retrofit retrofit) {
         return retrofit.create(ApiEndPoints.class);
+    }
+
+    @Provides
+    @Singleton
+    public HostSelectionInterceptor provideHostSelectionInterceptor(){
+        return new HostSelectionInterceptor();
     }
 }

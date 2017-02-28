@@ -2,9 +2,9 @@ package com.jmperezra.foodie;
 
 import android.app.Application;
 
-import com.jmperezra.foodie.db.DataBaseHelper;
+import com.jmperezra.foodie.commons.db.DataBaseHelper;
 import com.jmperezra.foodie.di.ComponentsHelper;
-import com.jmperezra.foodie.logger.LoggerImpl;
+import com.jmperezra.foodie.commons.logger.LoggerImpl;
 
 import butterknife.ButterKnife;
 
@@ -46,6 +46,9 @@ public class FoodieApplication extends Application {
     }
 
     public DataBaseHelper getDataBaseHelper(){
+        if (dataBaseHelper == null){
+            releaseLocalStorage();
+        }
         return dataBaseHelper;
     }
 }

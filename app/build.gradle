@@ -36,7 +36,7 @@ android {
         }
 
         pre {
-            buildConfigField STRING, "API_URL", '"https://wssrsi02.cajarural.com:10004/SOA_RVIA/Empresa/PS/rest/v1/"'
+            buildConfigField STRING, "API_URL", '"https://private-bff52a-ruralviaapi.apiary-mock.com/"'
         }
 
         pro {
@@ -45,6 +45,16 @@ android {
 
         local{
             buildConfigField STRING, "API_URL", '"/"'
+        }
+    }
+
+    sourceSets {
+        test {
+            java.srcDirs += 'src/testlib/java'
+        }
+        androidTest {
+            java.srcDirs += ['src/testlib/java']
+            resources.srcDirs += ['src/test/resources']
         }
     }
 }
@@ -60,14 +70,15 @@ dependencies {
     compile parent.ext.libSupportAnnotations
 
     //Thirds Party
+    compile parent.ext.libViewPagerIndicator
     apt parent.ext.libDaggerCompiler
     compile parent.ext.libDagger
     provided parent.ext.libDaggerAnnotation
 
     compile parent.ext.libButterKnife
     compile parent.ext.libRetrofitCompile
-    compile parent.ext.libOkHttpCompile
     compile parent.ext.libJsonRetrofitCompile
+    compile parent.ext.libOkHttpCompile
     compile parent.ext.libLogginInterceptor
     compile parent.ext.libDecoratorView
     provided parent.ext.libDecotatorViewCompiler
@@ -101,6 +112,9 @@ dependencies {
 
     androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
     androidTestCompile 'com.github.fabioCollini:DaggerMock:0.6.3'
+
+    compile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
+
     androidTestApt parent.ext.libDaggerCompiler
 
     compile project(path: ':presentation')

@@ -1,0 +1,10 @@
+{
+  "EE_O_LoginBE": {
+    "codigoRetorno": "0",
+    "Errores": {
+      "codigoMostrar": "1500",
+      "mensajeMostrar": "La password indicada no es correcta.Por favor realice de nuevo la operación.",
+      "solucion": "REVISE LA ESPECIFICACION DEL SERVICIO"
+    }
+  }
+}

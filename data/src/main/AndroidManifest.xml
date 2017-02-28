@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.jmperezra.data">
+    <application
+        tools:node="replace"
+        android:allowBackup="true"
+        android:label="Foodie">
+    </application>
+
+</manifest>

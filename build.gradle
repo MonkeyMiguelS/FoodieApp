@@ -31,6 +31,9 @@ allprojects {
 
         //** Third Party Libraries **
 
+        //ViewPageIndicator
+        libViewPagerIndicator = 'com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar'
+
         //Gradle: Injection Dependencies
         libDaggerCompiler = 'com.google.dagger:dagger-compiler:2.8'
         libDagger = 'com.google.dagger:dagger:2.8'

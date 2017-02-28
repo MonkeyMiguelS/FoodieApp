@@ -2,7 +2,7 @@ package com.domain.usecase.receipt.gateway;
 
 import com.domain.exceptions.ApiGatewayException;
 import com.domain.exceptions.LocalGatewayException;
-import com.domain.exceptions.NetworkGatewayException;
+import com.domain.exceptions.NetworkException;
 import com.domain.gateway.receipt.ReceiptApiGateway;
 import com.domain.gateway.receipt.ReceiptLocalGateway;
 import com.domain.models.ReceiptModel;
@@ -17,7 +17,7 @@ public class ReceiptGateway {
         this.localGateway = localGateway;
     }
 
-    public ReceiptModel getReceipt() throws LocalGatewayException, ApiGatewayException, NetworkGatewayException {
+    public ReceiptModel getReceipt() throws LocalGatewayException, ApiGatewayException, NetworkException {
         try{
             return fromLocal();
         }catch (LocalGatewayException ex) {
@@ -34,7 +34,7 @@ public class ReceiptGateway {
         }
     }
 
-    public ReceiptModel fromApi() throws NetworkGatewayException, ApiGatewayException{
+    public ReceiptModel fromApi() throws NetworkException, ApiGatewayException{
         ReceiptModel receiptModel = apiGateway.obtainReceiptModel();
         if (receiptModel == null){
             throw new ApiGatewayException();

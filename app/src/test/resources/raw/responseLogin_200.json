@@ -1,0 +1,17 @@
+{
+  "EE_O_LoginBE": {
+    "codigoRetorno": "1",
+    "Respuesta": {
+      "codigoEntidad": "0198",
+      "estadoUsuario": "A",
+      "idExterno": "66661111G",
+      "idInternoPe": "01577913",
+      "nombreUsuario": "PEDRO ANTONIO SANCHEZ SEBASTIAN",
+      "nombreEntidad": "BANCO COOPERATIVO ESPAÑOL",
+      "numeroIntentos": "0",
+      "numeroTarjeta": "198030100",
+      "codigoOficina": "1",
+      "usuarioBE": "03030100"
+    }
+  }
+}

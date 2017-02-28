@@ -1,0 +1,10 @@
+{
+  "EE_O_LoginBE": {
+    "codigoRetorno": "0",
+    "Errores": {
+      "codigoMostrar": "1503",
+      "mensajeMostrar": "Usuario no encontrado",
+      "solucion": "REVISE LA ESPECIFICACION DEL SERVICIO"
+    }
+  }
+}

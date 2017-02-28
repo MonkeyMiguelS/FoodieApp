@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">FoodieApp</string>
+    <string name="text_hint_password">Contraseña</string>
+    <string name="text_hint_alias">Usuario</string>
+    <string name="label_ok_button">Ok</string>
+    <string name="label_button_login">Aceptar</string>
+    <string name="title_discovery_page_slide">Título</string>
+    <string name="title_receipt_page_slide">Recetas</string>
+    <string name="title_ingredients_page_slide">Ingredientes</string>
+    <string name="title_healthy_food_page_slide">Comida Saludable</string>
 </resources>

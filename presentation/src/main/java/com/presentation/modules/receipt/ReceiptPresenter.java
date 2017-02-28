@@ -63,8 +63,9 @@ public class ReceiptPresenter extends Presenter<ReceiptView> {
         }).execute(useCaseInvoker);
     }
 
-    private void renderReceipt(ReceiptModel receiptModel){
-        getView().renderReceiptView(receiptModel);
+    private void showNetworkError(){
+        getView().hideSpinner();
+        getView().showNetworkError();
     }
 
     private void showInternalError(){
@@ -72,13 +73,14 @@ public class ReceiptPresenter extends Presenter<ReceiptView> {
         getView().showInternalError();
     }
 
+    private void renderReceipt(ReceiptModel receiptModel){
+        getView().renderReceiptView(receiptModel);
+    }
+
     private void showApiError(){
         getView().hideSpinner();
         getView().showApiError();
     }
 
-    private void showNetworkError(){
-        getView().hideSpinner();
-        getView().showNetworkError();
-    }
+
 }

@@ -1,7 +1,7 @@
 package com.data.repository.local.receipt;
 
 import com.domain.exceptions.ApiGatewayException;
-import com.domain.exceptions.NetworkGatewayException;
+import com.domain.exceptions.NetworkException;
 import com.domain.gateway.receipt.ReceiptApiGateway;
 import com.domain.models.ReceiptModel;
 
@@ -15,7 +15,7 @@ public class ReceiptApiGatewayImpl implements ReceiptApiGateway {
     }
 
     @Override
-    public ReceiptModel obtainReceiptModel() throws ApiGatewayException, NetworkGatewayException {
+    public ReceiptModel obtainReceiptModel() throws ApiGatewayException, NetworkException {
         return null;
     }
 }

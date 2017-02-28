@@ -39,4 +39,8 @@ public class ComponentsHelper {
         }
         return appComponent;
     }
+
+    public void setAppComponent(AppComponent appComponent){
+        this.appComponent = appComponent;
+    }
 }

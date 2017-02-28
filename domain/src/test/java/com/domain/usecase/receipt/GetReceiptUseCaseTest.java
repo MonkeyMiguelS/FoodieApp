@@ -1,9 +1,9 @@
 package com.domain.usecase.receipt;
 
-import com.domain.commons.stubs.ReceiptStub;
+import com.domain.testcommons.stubs.ReceiptStub;
 import com.domain.exceptions.ApiGatewayException;
 import com.domain.exceptions.LocalGatewayException;
-import com.domain.exceptions.NetworkGatewayException;
+import com.domain.exceptions.NetworkException;
 import com.domain.exceptions.errors.ApiUseCaseError;
 import com.domain.exceptions.errors.NetworkUseCaseError;
 import com.domain.gateway.receipt.ReceiptApiGateway;
@@ -42,7 +42,6 @@ public class GetReceiptUseCaseTest {
     public void setUp() throws Exception {
         getReceiptUseCase = new GetReceiptUseCase(localGateway, apiGateway);
         receiptModel = ReceiptStub.getReceipt();
-        receiptModel = ReceiptStub.getReceipt();
         successResponse = new UseCaseResponse<>(receiptModel);
     }
 
@@ -52,25 +51,12 @@ public class GetReceiptUseCaseTest {
      * @throws Exception
      */
     @Test
-    public void whenExisLocalModelThenReturnUseCaseResponse() throws Exception{
+    public void shouldReturnModel() throws Exception{
         when(localGateway.obtainReceiptModel()).thenReturn(receiptModel);
 
         UseCaseResponse<ReceiptModel> response = getReceiptUseCase.call();
 
         Assert.assertNotNull(response);
-    }
-
-    /**
-     * Si existe el model en local, entonces devuelve el modelo.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void whenExistModelInLocalThenReturnModel() throws Exception{
-        when(localGateway.obtainReceiptModel()).thenReturn(receiptModel);
-
-        UseCaseResponse<ReceiptModel> response = getReceiptUseCase.call();
-
         Assert.assertTrue(response.getResult().equals(receiptModel));
     }
 
@@ -80,13 +66,13 @@ public class GetReceiptUseCaseTest {
      * @throws Exception
      */
     @Test
-    public void whenDontExistLocalModelThenCallApiGateway() throws Exception{
+    public void shouldObtainReceiptModel() throws Exception{
         when(localGateway.obtainReceiptModel()).thenReturn(null);
-
         when(apiGateway.obtainReceiptModel()).thenReturn(receiptModel);
 
         getReceiptUseCase.call();
 
+        //Se repite con el de abajo
         Mockito.verify(apiGateway).obtainReceiptModel();
     }
 
@@ -96,13 +82,13 @@ public class GetReceiptUseCaseTest {
      * @throws Exception
      */
     @Test
-    public void whenDontExistLocalModelThenReturnModelFromApi() throws Exception{
+    public void shouldObtainReceiptModelFromApi() throws Exception{
         when(localGateway.obtainReceiptModel()).thenReturn(null);
-
         when(apiGateway.obtainReceiptModel()).thenReturn(receiptModel);
 
         UseCaseResponse<ReceiptModel> response = getReceiptUseCase.call();
 
+        Mockito.verify(apiGateway).obtainReceiptModel();
         Assert.assertTrue(response.getResult().equals(receiptModel));
     }
 
@@ -112,7 +98,7 @@ public class GetReceiptUseCaseTest {
      * @throws Exception
      */
     @Test
-    public void whenApiThrowExceptionThenReturnApiError() throws Exception{
+    public void shouldReturnApiUseCaseErrorWhenServiceThrowException() throws Exception{
         doThrow(LocalGatewayException.class).when(localGateway).obtainReceiptModel();
         doThrow(ApiGatewayException.class).when(apiGateway).obtainReceiptModel();
 
@@ -128,7 +114,7 @@ public class GetReceiptUseCaseTest {
      * @throws Exception
      */
     @Test
-    public void whenConnectionRefusedThenReturnNetworkError() throws Exception{
+    public void shouldReturnNetworkErrorWhenThereIsNotInternet() throws Exception{
         when(localGateway.obtainReceiptModel()).thenReturn(null);
 
         doThrow(ApiGatewayException.class).when(apiGateway).obtainReceiptModel();
@@ -145,7 +131,7 @@ public class GetReceiptUseCaseTest {
      * @throws Exception
      */
     @Test
-    public void whenObtainModelFromApiThenPersistModel() throws Exception{
+    public void shouldPersistApiWhenObtainReceiptFromApi() throws Exception{
         when(localGateway.obtainReceiptModel()).thenReturn(null);
 
         when(apiGateway.obtainReceiptModel()).thenReturn(receiptModel);
@@ -163,7 +149,7 @@ public class GetReceiptUseCaseTest {
      * @throws Exception
      */
     @Test
-    public void whenPersistThrowExceptionThenReturnModel() throws Exception{
+    public void shouldReturnReceiptModelWhenPersistReceipt() throws Exception{
         when(localGateway.obtainReceiptModel()).thenReturn(null);
 
         when(apiGateway.obtainReceiptModel()).thenReturn(receiptModel);
@@ -177,7 +163,7 @@ public class GetReceiptUseCaseTest {
     }
 
     @Test
-    public void whenThereIsErrorInLocalThenObtainModelFromApi() throws Exception{
+    public void shouldObtainReceiptFromApiWhenThereIsErrorInLocal() throws Exception{
         doThrow(LocalGatewayException.class).when(localGateway).obtainReceiptModel();
 
         getReceiptUseCase.call();
@@ -186,10 +172,10 @@ public class GetReceiptUseCaseTest {
     }
 
     @Test
-    public void whenCatchNetworkErrorThenReturnNetworkError() throws Exception{
+    public void shouldReturnNetworkErrorWhenThrowNetworkException() throws Exception{
         when(localGateway.obtainReceiptModel()).thenReturn(null);
 
-        doThrow(NetworkGatewayException.class).when(apiGateway).obtainReceiptModel();
+        doThrow(NetworkException.class).when(apiGateway).obtainReceiptModel();
 
         UseCaseResponse<ReceiptModel> response = getReceiptUseCase.call();
 
